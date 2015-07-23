@@ -155,7 +155,7 @@ function getObjectName(obj) {
 function addObject(obj, name) {
     console.log('addObject:' + name);
 
-    if (objectAlreadyExists(obj)) {
+    if (objectAlreadyExists(obj) || (obj instanceof HTMLElement)) {
         return;
     }
     var insertedObj = insertObject(obj, name);
