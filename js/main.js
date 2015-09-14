@@ -170,7 +170,7 @@ function addObject(obj, name) {
             var key = keys[i];
             var val = obj[keys[i]];
 
-            if (obj.hasOwnProperty(key) === false) {
+            if (obj.hasOwnProperty && obj.hasOwnProperty(key) === false) {
                 return;
             }
 
@@ -191,7 +191,7 @@ function addObject(obj, name) {
         }
     }
     if (typeof obj.constructor !== 'undefined' && !objectAlreadyExists(obj.constructor)) {
-        if (obj.constructor.hasOwnProperty('name')) {
+        if (obj.constructor.hasOwnProperty && obj.constructor.hasOwnProperty('name')) {
             addObject(obj.constructor, obj.constructor.name, true, false);
         } else {
             addObject(obj.constructor, name + '.constructor', true, false);
@@ -206,10 +206,10 @@ function processObjects() {
             return;
         }
 
-        if (obj.hasOwnProperty('prototype')) {
+        if (obj.hasOwnProperty && obj.hasOwnProperty('prototype')) {
             insertLink(obj, obj.prototype, 'prototype');
         }
-        if (obj.hasOwnProperty('constructor')) {
+        if (obj.hasOwnProperty && obj.hasOwnProperty('constructor')) {
             insertLink(obj, obj.constructor, 'constructor');
         }
         if (obj.__proto__ !== null) {
@@ -221,7 +221,7 @@ function processObjects() {
                 var key = keys[i];
                 var val = obj[keys[i]];
 
-                if (obj.hasOwnProperty(key) === false) {
+                if (obj.hasOwnProperty && obj.hasOwnProperty(key) === false) {
                     return;
                 }
                 insertLink(obj, val, key);
@@ -548,7 +548,7 @@ $("#generateBtn").click(
     addObject(Date, Date.name);
     addObject(RegExp, RegExp.name);
      */
-    eval($('#userJavascriptCode').val())
+    eval.call(window,($('#userJavascriptCode').val()));
     processObjects();
     produceDot();
     dot = getDot();
